@@ -1,0 +1,32 @@
+Source: vlan
+Section: misc
+Priority: optional
+Maintainer: Willem van den Akker <wvdakker@wilsoft.nl>
+Build-Depends: debhelper-compat (= 12)
+Standards-Version: 4.3.0
+Rules-Requires-Root: no
+Vcs-Git: https://salsa.debian.org/debian/vlan.git
+Vcs-Browser: https://salsa.debian.org/debian/vlan
+
+Package: vlan
+Architecture: all
+Depends: ${misc:Depends}, ${shlibs:Depends}, iproute2
+Section: misc
+Multi-Arch: foreign
+Description: ifupdown integration for vlan configuration
+ This package contains integration scripts for configuring vlan
+ interfaces via ifupdown (/etc/network/interfaces).
+ For further details see vlan-interfaces(5) man page in this package.
+ .
+ Please note that these integration scripts only supports a limited
+ set of interface naming schemes, which means you might be better
+ off with writing your own ifupdown hooks using ip(route2)
+ directly in /etc/network/interfaces rather than using this package.
+ .
+ It currently also ships a wrapper script for backwards compatibility
+ called vconfig, that replaces the old deprecated vconfig program
+ with translations to ip(route2) commands.
+ This compatibility shim might be dropped in future releases, please
+ use ip(route2) commands directly.
+ .
+ Your kernel needs vlan support for this to work, see "modinfo 8021q".

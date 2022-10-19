@@ -1,0 +1,238 @@
+vlan (2.0.5) unstable; urgency=medium
+
+  * debian/network/if-pre-up.d/vlan: add missing biosdevname (Closes: #922801).
+    - Thanks to Dan Steetman for the patch.
+
+ -- Willem van den Akker <wvdakker@wilsoft.nl>  Thu, 21 Feb 2019 08:29:59 +0100
+
+vlan (2.0.4) unstable; urgency=medium
+
+  * New maintainer (Closes: #918013).
+  * debian/control: bump Standards-Version to 4.3.0.
+  * debian/copyright: make machine readable.
+  * debian/network/*: make scripts executable.
+
+ -- Willem van den Akker <wvdakker@wilsoft.nl>  Mon, 04 Feb 2019 17:36:33 +0100
+
+vlan (2.0.3) unstable; urgency=medium
+
+  * Orphan vlan.
+  * Actually support Rules-Requires-Root: no.
+  * Set Multi-Arch: foreign.
+
+ -- Andrej Shadura <andrewsh@debian.org>  Wed, 02 Jan 2019 22:59:42 +0100
+
+vlan (2.0.2) unstable; urgency=medium
+
+  [ Niels Thykier ]
+  * Bump debhelper compat to 12
+  * Declare that vlan can produce its binary package without using (fake)root via "Rules-Requires-Root"
+
+  [ Andrej Shadura ]
+  * Merge changes from Niels Thykier (Closes: #917944)
+  * This is now an Architecture: all package (Closes: #745202, #794156).
+
+ -- Andrej Shadura <andrewsh@debian.org>  Wed, 02 Jan 2019 11:18:54 +0100
+
+vlan (2.0.1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/control: Deprecate priority extra as per policy 4.0.1.
+
+  [ Andrej Shadura ]
+  * Fix a typo in the script (patch by Marc Dequènes).
+  * Merge changes from unstable.
+  * Upload to unstable.
+
+ -- Andrej Shadura <andrewsh@debian.org>  Wed, 02 Jan 2019 11:08:55 +0100
+
+vlan (2.0) experimental; urgency=medium
+
+  * Non-maintainer upload.
+  * Make this a native package and replace the previous upstream source
+    with Andrew Shaduras vconfig compatibility script. (Closes: #501402)
+  * Update package description to better describe this package content.
+  * Rewrite debian/rules
+  * Bump Standards-Version to 3.9.6
+  * Update debian/network/ contents to not rely on vconfig.
+    - in preparation for potentian future dropping vconfig compat script.
+  * Update debian/copyright for the new package content.
+  * Make vconfig always print a deprecated notice to stderr when executed.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Wed, 06 Jan 2016 18:42:14 +0100
+
+vlan (1.9-3.4) unstable; urgency=medium
+
+  * Merge a change from Ubuntu:
+    - Support biosdevname interface names out of the box (LP: #948559).
+  * Update Vcs-*.
+
+ -- Andrej Shadura <andrewsh@debian.org>  Thu, 02 Aug 2018 14:10:52 +0200
+
+vlan (1.9-3.3) unstable; urgency=medium
+
+  [ Stéphane Graber ]
+  * Now that a vlan interface can be created by a udev hook and
+    ifupdown checks return codes from the scripts,
+    make sure to properly deal with an already existing interface.
+
+  [ Dan Streetman ]
+  * If VLAN is configured with higher MTU than raw device MTU, which can
+    happen if VLAN is ifup'ed before raw device, then increase raw device
+    MTU first so the VLAN ifup does not fail. (LP: #1224007)
+  * Allow ip-rp-filter to be 0, 1, or 2 instead of only 0 or 1
+    (LP: #1716964)
+
+ -- Andrew Shadura <andrewsh@debian.org>  Sun, 26 Nov 2017 10:58:34 +0000
+
+vlan (1.9-3.2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Don't exit when we're called by bridge-utils.
+
+ -- Andrew Shadura <andrewsh@debian.org>  Tue, 01 Apr 2014 09:42:56 +0200
+
+vlan (1.9-3.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Don't act on VLAN interfaces already supported by ifupdown
+    (Closes: #705456)
+  * Don't depend on iproute, depend on iproute2 instead.
+
+ -- Andrew Shadura <andrewsh@debian.org>  Sun, 23 Mar 2014 14:42:43 +0100
+
+vlan (1.9-3) unstable; urgency=low
+
+  * Add XS-Vcs-Git and XS-Vcs-Browser fields to control.
+  * Fix and cleanup the vlan-interfaces.5 man page.
+  * Drop useless delta and cleanup Debian diff.
+  * Rewrite copyright file completely; some copyrights and licensing headers
+    are missing upstream and should be clarified with the help of upstream.
+  * Stop installing README; no useful additional information.
+  * Drop Debian specific exit codes for vconfig errors; use upstream exit
+    codes instead; document this change in NEWS.
+  * Big cleanup to build and rules; misc fixes for obsolete constructions.
+  * Cleanup CCFLAGS:
+    - Build without -D_GNU_SOURCE; makes no difference on the resulting
+      binaries, so simply rely on the upstream build.
+    - Build with -O2 unless DEB_BUILD_OPTIONS has noopt.
+  * Prepare to ship macvlan_config in the future.
+  * Add support for bonding in if-pre-up and if-post-down scripts; cleanup
+    these scripts; closes: #404630.
+  * Point to the vlan-interfaces(5) man page in the Debian README and
+    recommend setting vlan-raw-device.
+  * Add support for wlan in if-pre-up and if-post-down scripts;
+    closes: #398837.
+  * Document the bonding and wlan changes in NEWS.
+  * Install howto.html as documentation.
+  * Document that aliases are ignored by the vlan scripts; closes: #400827.
+  * Add debian/TODO list.
+  * Pass STRIP=true to the upstream build to avoid stripping; closes: #438253.
+  * Hide "bind-type" in help string as it doesn't seem to be implemented;
+    closes: #398807.
+  * Document that the default for REORDER_HDR is 1 since 2.6.18; thanks
+    Kristian Sørensen; closes: #436219.
+
+ -- Loic Minier <lool@dooz.org>  Sun, 30 Sep 2007 18:12:43 +0200
+
+vlan (1.9-2) unstable; urgency=medium
+
+  * Bump up Standards-Version to 3.7.2.
+  * Bump up Debhelper compatibility level to 5.
+  * Comment out DH_VERBOSE.
+  * Add ${misc:Depends}.
+  * Add empty binary-indep target; thanks Aurelien Jarno; closes: #395758.
+  * Update description to clarify that 2.6 kernels are supported; thanks
+    Martin Michlmayr; closes: #344782.
+  * Drop debian/source.lintian-overrides.
+  * Drop debconf-utils from Depends.
+  * Drop obsolete debian/vlan-nice.patch and debian/vlan-fixes.patch, as well
+    as README.Debian which only referenced them.
+
+ -- Loic Minier <lool@dooz.org>  Sat, 28 Oct 2006 10:52:43 +0200
+
+vlan (1.9-1) unstable; urgency=low
+
+  * New upstream release.
+    - Fix return error codes in vconfig. (Closes: #320452)
+  * Fix /etc/network/if-up.d/ip to not set rp_filter to 1 when it isn't
+    configured. (Closes: #330673) [debian/ip-if-up]
+  * Bump up Standards-Version to 3.6.2. [debian/control]
+  * Add myself to the uploaders. [debian/control]
+  * Update upstream URL.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 20 Oct 2005 11:10:08 +0200
+
+vlan (1.8-2) unstable; urgency=low
+
+  * Fixed postdown scripts to remove vlan interfaces when vlan-raw-device is
+    set, independent of the interface name. This bug was introduced by fixing
+    #196890 not correctly.
+    closes: #292648
+  * Ignore any interface with a colon in its name.
+    closes: #272891
+  * When vlan-raw-device is set, don't try to be smart. br0.x (and any other
+    interface) can now be made.
+    closes: #272446
+
+ -- Ard van Breemen <ard@kwaak.net>  Wed, 30 Mar 2005 08:29:14 +0200
+
+vlan (1.8-1) unstable; urgency=low
+
+  * New upstream
+    closes: #213656
+  * Fixed postdownscripts to detect and remove eth*.* interfaces correctly
+    closes: #196890
+
+ -- Ard van Breemen <ard@kwaak.net>  Sat, 14 Aug 2004 16:49:24 +0200
+
+vlan (1.6-1.1) unstable; urgency=low
+
+  * Non-maintainer upload according to the release manager's plan.
+  * Fixed multiline strings to fix building from sources
+    closes: #195064
+
+ -- Roland Mas <lolando@debian.org>  Sat, 23 Aug 2003 17:37:24 +0200
+
+vlan (1.6-1) unstable; urgency=low
+
+  * New upstream
+    closes:#172366
+  * Fix scripts
+    closes:#189383
+    closes:#148476
+  * Added documentation for /etc/network/interfaces
+    closes:#148480
+  * Removed kernel patches
+    closes:#166272
+    closes:#124836
+  * Fixed debian/rules to build under build and not under binary
+    closes:#172818
+  * Fixed manpage
+
+ -- Ard van Breemen <ard@kwaak.net>  Sun, 20 Apr 2003 22:59:59 +0100
+
+vlan (1.5-2) unstable; urgency=low
+
+  * Fixed bug in /etc/network/if-pre-up.d/vlan
+    VLANID was not correctly determined
+
+ -- Ard van Breemen <ard@kwaak.net>  Tue, 19 Feb 2002 11:00:18 +0100
+
+vlan (1.5-1) unstable; urgency=low
+
+  * New upstream
+  * Removed dependency on debhelper for vlan
+  * Removed -fguiding-decls
+    closes:#128627
+  * Fixed spelling errors
+    closes:#125461
+
+ -- Ard van Breemen <ard@kwaak.net>  Mon, 15 Oct 2001 19:06:59 +0200
+
+vlan (1.0.4-1) unstable; urgency=low
+
+  * First debianized version, so ITP can be closed.
+    closes:#115791
+
+ -- Ard van Breemen <ard@kwaak.net>  Mon, 15 Oct 2001 19:06:59 +0200
